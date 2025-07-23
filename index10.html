@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 10</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0c6dff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: #e0ffe7;
+            color: darkgreen;
+        }
+        
+        .error {
+            background-color: #ffdbde;
+            color: maroon;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Kiểm tra Email</h1>
+        <form id="emailForm">
+            <label for="email">Nhập địa chỉ email:</label>
+            <input type="text" id="email" placeholder="Ví dụ: example@domain.com">
+            <button type="button" onclick="checkEmail()">Kiểm tra</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('emailForm');
+        const emailInput = document.getElementById('email');
+        const messageDiv = document.getElementById('message');
+
+        function checkEmail() {
+            const email = emailInput.value.trim();
+            if (isValidEmail(email)) {
+                showMessage('Email hợp lệ', 'success');
+                console.log('Email hợp lệ:', email);
+            } else {
+                showMessage('Email không hợp lệ!', 'error');
+                console.log('Email không hợp lệ:', email);
+            }
+        }
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            checkEmail();
+        });
+        emailInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                checkEmail();
+            }
+        });
+
+        function isValidEmail(email) {
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailPattern.test(email);
+        }
+
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+        }
+    </script>
+</body>
+
+</html>

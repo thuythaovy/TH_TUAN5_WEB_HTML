@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 2</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0c6dff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .valid {
+            background-color: #e0ffe7;
+            color: darkgreen;
+        }
+        
+        .invalid {
+            background-color: #ffdbde;
+            color: maroon;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="'container">
+        <h1>Kiểm tra ngày tháng</h1>
+        <p>Nhập văn bản vào ô bên dưới để kiểm tra:</p>
+
+        <input type="text" id="dateInput" placeholder="Nhập ngày (DD/MM/YYYY)">
+        <button onclick="checkDate()">Kiểm tra</button>
+
+        <div id="ketQua" class="result"></div>
+    </div>
+    <script>
+        function checkDate() {
+            var ngayNhap = document.getElementById('dateInput').value;
+            var ketQua = document.getElementById('ketQua');
+
+            if (ngayNhap === '') {
+                ketQua.innerHTML = 'Vui lòng nhập ngày!';
+                ketQua.className = 'result invalid';
+                return;
+            }
+
+            var phanCat = ngayNhap.split('/');
+
+            if (phanCat.length !== 3) {
+                ketQua.innerHTML = 'Sai định dạng!';
+                ketQua.className = 'result invalid';
+                return;
+            }
+
+            var ngay = Number(phanCat[0]);
+            var thang = Number(phanCat[1]);
+            var nam = Number(phanCat[2]);
+
+            if (thang < 1 || thang > 12) {
+                ketQua.innerHTML = 'Tháng phải từ 1 đến 12';
+                ketQua.className = 'result invalid';
+                return;
+            }
+
+            if (ngay < 1 || ngay > 31) {
+                ketQua.innerHTML = 'Ngày phải từ 1 đến 31';
+                ketQua.className = 'result invalid';
+                return;
+            }
+            var ngayTrongThang = new Date(nam, thang, 0).getDate();
+            if (ngay > ngayTrongThang) {
+                ketQua.innerHTML = 'Tháng' + thang + 'chỉ có' + ngayTrongThang + 'ngày!';
+                ketQua.className = 'result invalid';
+                return;
+            }
+
+            ketQua.innerHTML = 'Ngày ' + ngayNhap + ' hợp lệ!';
+            ketQua.className = 'result valid';
+        }
+    </script>
+</body>
+
+</html>
